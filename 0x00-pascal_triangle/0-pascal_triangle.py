@@ -3,7 +3,11 @@
 0. Pascal's Triangle
 """
 
+
 def pascal_triangle(n):
+    """
+    Funtion that defines pascals triangle
+    """
     if n <= 0:
         return []
 
@@ -17,10 +21,4 @@ def pascal_triangle(n):
         triangle.append(row)
 
     return triangle
-
-
-# Test the function
-if __name__ == "__main__":
-    triangle = pascal_triangle(5)
-    for row in triangle:
-        print("[{}]".format(",".join(map(str, row))))
+    
