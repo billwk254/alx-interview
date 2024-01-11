@@ -34,3 +34,12 @@ def unlock(boxes, box, keys):
             unlock(boxes, key, keys)
     # Return True if the size of the set is equal to the number of boxes
     return len(keys) == len(boxes)
+
+
+def main():
+    """Entry point"""
+    canUnlockAll([[]])
+
+
+if __name__ == '__main__':
+    main()
