@@ -1,9 +1,20 @@
 #!/usr/bin/python3
+"""
+Print the file size and number of lines for each status code.
+"""
+
 import sys
 import signal
 
 
 def print_stats(total_size, status_codes):
+    """
+    Print the file size and number of lines for each status code.
+
+    Args:
+        total_size (int): Total file size.
+        status_codes (dict): Dictionary containing status codes and their counts.
+    """
     print("File size: {}".format(total_size))
     for code in sorted(status_codes):
         print("{}: {}".format(code, status_codes[code]))
@@ -15,6 +26,13 @@ def signal_handler(sig, frame):
 
 
 def parse_line(line):
+     """
+    Signal handler function to print stats and exit gracefully on CTRL + C.
+
+    Args:
+        sig: Signal number.
+        frame: Current stack frame.
+    """
     try:
         parts = line.split()
         ip = parts[0]
