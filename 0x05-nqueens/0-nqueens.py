@@ -23,11 +23,17 @@ def is_safe(board, row, col, N):
     return True
 
 
-def solve_nqueens_util(board, col, N):
+def solve_nqueens_util(board, col, N, solutions):
     """Solve N Queens problem using backtracking."""
-    # If all queens are placed then return True
+    # If all queens are placed then append the current solution
     if col >= N:
-        return True
+        solution = []
+        for i in range(N):
+            for j in range(N):
+                if board[i][j] == 1:
+                    solution.append([i, j])
+        solutions.append(solution)
+        return
 
     # Consider this column and try placing this queen in all rows one by one
     for i in range(N):
@@ -35,15 +41,11 @@ def solve_nqueens_util(board, col, N):
             board[i][col] = 1
 
             # recur to place rest of the queens
-            if solve_nqueens_util(board, col + 1, N):
-                return True
+            solve_nqueens_util(board, col + 1, N, solutions)
 
             # If placing queen in board[i][col] doesn't lead to a solution
             # then remove queen from board[i][col]
             board[i][col] = 0
-
-    # if queen can not be place in any row in this column col then return False
-    return False
 
 
 def solve_nqueens(N):
@@ -58,17 +60,17 @@ def solve_nqueens(N):
 
     # Initialize the board
     board = [[0] * N for _ in range(N)]
+    solutions = []
 
-    if not solve_nqueens_util(board, 0, N):
+    solve_nqueens_util(board, 0, N, solutions)
+
+    if not solutions:
         print("No solution exists")
         return
 
-    # Print the solution
-    for i in range(N):
-        for j in range(N):
-            if board[i][j] == 1:
-                print("[{}, {}]".format(i, j), end=" ")
-        print()
+    # Print the solutions
+    for solution in solutions:
+        print(solution)
 
 
 if __name__ == "__main__":
